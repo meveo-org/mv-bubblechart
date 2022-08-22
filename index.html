@@ -1,0 +1,31 @@
+<html>
+<head>
+
+
+  <script type="module" src="./mv-chart.js"></script>
+
+  
+
+<script src="https://d3js.org/d3.v7.min.js"></script>
+<style>  .observablehq{display:none;}   body{background-color:#EAF4F8;}</style>
+
+</head>
+<body>
+
+  
+  <mv-chart-bubble></mv-chart-bubble>
+  
+
+
+  <script type="module">
+  var chart=document.querySelector('mv-chart-bubble').shadowRoot;
+  const svg = d3.select(chart).select('#chart') ;
+  import define from "./MVBubbleChart.js";
+  import {Runtime, Library, Inspector} from "./runtime.js";
+  const runtime = new Runtime();
+  const main = runtime.module(define, Inspector.into(document.body));
+  </script>
+
+
+</body>
+</html>
