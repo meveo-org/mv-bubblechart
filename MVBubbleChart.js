@@ -7,12 +7,9 @@ function _chart(BubbleChart,files){
   BubbleChart(files, {
     label: d => d.label,
     value: d => d.value,
-    group: d => d.id,
-    title: d => d.label,
     founds : d => d.founds,
     image : d=>d.image,
-    link: d => ``,
-    founds : d => d.founds,
+    link: d => d.link,
     width: 600,
     height:600
   })
@@ -86,9 +83,10 @@ function _chart(BubbleChart,files){
   
     // Compute labels and titles.
     const L = label == null ? null : d3.map(data, label);
-    const T = title === undefined ? L : title == null ? null : d3.map(data, title);
     const F = founds == null ? null : d3.map(data, founds);
     const P = image == null ? null : d3.map(data, image);
+    const K = link == null ? null : d3.map(data, link);
+
     
     
    
@@ -120,45 +118,33 @@ function _chart(BubbleChart,files){
   
         const leaf = svg.selectAll("a")
         .data(root.leaves())
-        .join("a")
-        .attr("xlink:href", link == null ? null : (d, i) => link(D[d.data], i, data))
+        .join("g")
+
         .attr("target", link == null ? null : linkTarget)
         .attr("transform", d => `translate(${d.x},${d.y})`)
-        /*.scaleLinear()
-        .domain([0, 100000])
-        .range([0, 400])*/
-  
-        
-  
-        
-  
-    if (L) {
-      // A unique identifier for clip paths (to avoid conflicts).
-      const uid = `O-${Math.random().toString(16).slice(2)}`;
-  
 
+  
+        
+  
+        
+  
+  
+      const uid = `O-${Math.random().toString(16).slice(2)}`;
+      
+      
+      
+
+     
    
   
         leaf.append("clipPath")
         .attr("id", d => `${uid}-clip-${d.data}`)
-        .append("circle")
-        .attr("r",d => d.r );
-  
-        
 
-
-
-
-
-  
         const clip = leaf.append("g");
   
         const gradiant = clip.append('circle')
-        .attr("stroke", stroke)
-        .attr("stroke-width", strokeWidth)
-        .attr("stroke-opacity", strokeOpacity)
-        .attr("fill-opacity", fillOpacity)
-        .attr("r", d => d.r)
+
+        .attr("r",  d =>  d.r)
       
   
         gradiant.each(function (p, j) {
@@ -167,8 +153,13 @@ function _chart(BubbleChart,files){
         });
   
   
-  
-  
+        clip.append ("a")
+        .attr("xlink:href", d => K[d.data])
+        
+
+
+
+        //image svg icon
         
         clip.append('image')
           .attr('xlink:href', d => P[d.data])
@@ -177,15 +168,29 @@ function _chart(BubbleChart,files){
           .attr("x", d => -`${d.r/1.2/2}`)
           .attr ("y",d => -`${d.r/1.2+10}`)
           .attr("opacity",0.5 )
+
+
+
+          //founds
           
                 
+          clip.append("text")
+          .attr ("fill","#fff")
+          .attr("x", 0)
+          .attr("y", d => `${d.r/3.5}`)
+          .attr ( "class","founds")
+          .text(d => F[d.data]+' founds')
+          .style("font-size",  d => `${d.r/3}` +"px")
   
   
-  
-        clip.append("text")
-          .text(d => T[d.data])
+
+
+
+
+        //hits
+           clip.append("text")
+          .text(d => L[d.data])
           .style("font-size",  d => `${d.r/6}` +"px")
-          .attr("clip-path", d => `url(${new URL(`#${uid}-clip-${d.data}`, location)})`)
           .attr ("fill","#fff")
           .attr ( "class","title")
           .selectAll("tspan")
@@ -198,32 +203,16 @@ function _chart(BubbleChart,files){
           .text(d => d)
           
   
-       
-  
-          clip.append("text")
-          .attr ("fill","#fff")
-          .attr("x", 0)
-          .attr("y", d => `${d.r/3.5}`)
-          .attr ( "class","founds")
-          .text(d => F[d.data]+' founds')
-          .style("font-size",  d => `${d.r/3}` +"px")
-  
 
         
-        clip.select("tspan:last-child")
+          clip.select("tspan:last-child")
           .append ("tspan").text(" hits") .attr ('class','hits')
           .style("font-size",  d => `${d.r/6}` +"px")
   
   
 
-
-
-
-
- 
-  
        
-    }
+  
   
     return Object.assign(svg.node(), {scales: {color}});
   }
