@@ -1,7 +1,7 @@
 const data = [{
     "label": "Websites",
     "founds" : 3,
-    "value": 20,
+    "value": 25,
     "image": "./img/website.svg",
     "link" : "http://" 
   },{
@@ -13,7 +13,7 @@ const data = [{
   },{
     "label": "Phone Numbers",
     "founds": 3,
-    "value": 20,
+    "value": 30,
     "image": "./img/phone.svg",
     "link" : "http://" 
   },{
