@@ -56,10 +56,10 @@ function _chart(BubbleChart,files){
     height = width, // outer height, in pixels
     padding = 3, // padding between circles
     margin = 1, // default margins
-    marginTop = 10, // top margin, in pixels
-    marginRight = margin, // right margin, in pixels
-    marginBottom = margin, // bottom margin, in pixels
-    marginLeft = margin, // left margin, in pixels
+    marginTop = 20, // top margin, in pixels
+    marginRight = 20, // right margin, in pixels
+    marginBottom = 20, // bottom margin, in pixels
+    marginLeft = 40, // left margin, in pixels
     groups, // array of group names (the domain of the color scale)
     colors = d3.schemeTableau10, // an array of colors (for groups)
     fill = "#ccc", // a static fill color, if no group channel is specified
@@ -71,8 +71,10 @@ function _chart(BubbleChart,files){
     // Compute the values.
     const D = d3.map(data, d => d);
     const V = d3.map(data, value);
+
     const G = group == null ? null : d3.map(data, group);
     const I = d3.range(V.length).filter(i => V[i] > 0);
+
   
     // Unique the groups.
     if (G && groups === undefined) groups = I.map(i => G[i]);
@@ -87,6 +89,7 @@ function _chart(BubbleChart,files){
     const P = image == null ? null : d3.map(data, image);
     const K = link == null ? null : d3.map(data, link);
 
+
     
     
    
@@ -99,12 +102,18 @@ function _chart(BubbleChart,files){
         .sum(i => V[i]));
 
 
+   
+
+
+
+        
+
+
         var chart=document.querySelector('mv-chart-bubble').shadowRoot;
 
 
-        const svg = d3.select(chart).select('#chart') 
-  
 
+        const svg = d3.select(chart).select('#chart') 
         .attr("width", width)
         .attr("height", height)
         .attr("viewBox", [-marginLeft, -marginTop, width, height])
@@ -114,9 +123,14 @@ function _chart(BubbleChart,files){
         .attr("font-family", "sans-serif")
         .attr("text-anchor", "middle")
         .append ('g').attr("class","clip").attr("style","filter:url(#dropshadow)");
+        
+        const bubbles = d3.select(chart).select('#center') 
+  
+
+       
   
   
-        const leaf = svg.selectAll("a")
+        const leaf = bubbles.selectAll("a")
         .data(root.leaves())
         .join("g")
 
@@ -185,22 +199,26 @@ function _chart(BubbleChart,files){
   
 
 
-
-
-        //hits
-           clip.append("text")
-          .text(d => L[d.data])
-          .style("font-size",  d => `${d.r/6}` +"px")
+        
+          clip .append ('text').text(d => L[d.data]).style("font-size",  d => `${d.r/6}` +"px")
           .attr ("fill","#fff")
           .attr ( "class","title")
+          .attr("x", 0)
+          .attr("y", d => `${d.r/2}`)
+        //hits
+           clip.append("text")
+          .style("font-size",  d => `${d.r/6}` +"px")
+          .attr ("fill","#fff")
+          .attr ( "class","hits")
           .selectAll("tspan")
           .data(d => `${d.value}`.split(/\n/g))
           .join("tspan")
           .attr('fill','#fff')
           .attr("x", 0)
-          .attr("y", 50)
+          .attr("y", 0)
           .attr("fill-opacity", (d, i, D) => i === D.length - 1 ? 1 : null)
           .text(d => d)
+          
           
   
 
@@ -221,10 +239,7 @@ function _chart(BubbleChart,files){
   export default function define(runtime, observer) {
     const main = runtime.module();
     function toString() { return this.url; }
-  
-  
-  
- 
+
   
     // main.builtin("FileAttachment", runtime.fileAttachments(name => datas.get(name)));
     main.variable(observer("chart")).define("chart", ["BubbleChart","files"], _chart);
@@ -232,15 +247,7 @@ function _chart(BubbleChart,files){
     main.variable(observer("files")).define("files", ["flare"], _files);
     main.variable(observer("BubbleChart")).define("BubbleChart", ["d3","location"], _BubbleChart);
   
-  
-
-
-
-
-
-
-
-
+ 
     return main;
     
   }

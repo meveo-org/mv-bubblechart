@@ -130,11 +130,11 @@ svg {
 
 
 </defs>
-
+<g id="center">
 <circle  cx="250" cy="250" r="270" fill="#E2F1F6"/>
 <circle id="background" cx="250" cy="250" r="250" fill="#E9F4F7"/>
 <circle cx="250" cy="250" r="200" fill="white"  style="filter:url(#dropshadow)"/>
-
+</g>
 
 </svg>
 
