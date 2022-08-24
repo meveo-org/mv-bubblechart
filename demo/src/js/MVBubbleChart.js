@@ -170,7 +170,8 @@ function _BubbleChart(d3, location) {
       leaf.append("clipPath")
         .attr("id", d => `${uid}-clip-${d.data}`)
 
-      const clip = leaf.append("g");
+      const clip = leaf.append("g")        
+
 
   
 
@@ -180,6 +181,10 @@ function _BubbleChart(d3, location) {
         //fix radius  bubble if too small
         //.attr("r", d => (d.r<50) ?  70 : d.r)
         .attr("r", d => d.r)
+
+
+
+
   
 
 
@@ -190,8 +195,18 @@ function _BubbleChart(d3, location) {
       });
 
 
-      clip.append("a")
+        clip.append("a")
         .attr("xlink:href", d => K[d.data])
+        .append('image')
+        .attr('xlink:href', './src/img/fiche-bubblechart.svg')
+        .attr('width', d => `${d.r / 1.2}`)
+        .attr('height', d => `${d.r / 1.2}`)
+        .attr("x", d => -`${d.r / 1.2 / 8}`*10)
+        .attr("y", d => -`${d.r / 1.2 + 10}`)
+        .attr("opacity",0)
+
+
+
 
 
 
@@ -251,7 +266,19 @@ function _BubbleChart(d3, location) {
         .style("font-size", d => `${d.r / 6}` + "px")
 
 
-
+      clip
+      .on('mouseover',function(){
+        d3.select(this).select("image").attr('opacity', '0')
+        .transition()
+        .duration(1000)
+        .attr("opacity", "1")
+      })
+      .on('mouseout',function(){
+        d3.select(this).select("image").attr('opacity', '1')
+        .transition()
+        .duration(1000)
+        .attr("opacity", "0")
+      })
 
 
 
