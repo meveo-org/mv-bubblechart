@@ -2,7 +2,7 @@
 <head>
 
 
-  <script type="module" src="../src/js/mv-chart.js"></script>
+  <script type="module" src="./src/js/mv-chart.js"></script>
 
   
 
@@ -20,8 +20,8 @@
   <script type="module">
   var chart=document.querySelector('mv-chart-bubble').shadowRoot;
   const svg = d3.select(chart).select('#chart') ;
-  import define from "../src/js/MVBubbleChart.js";
-  import {Runtime, Library, Inspector} from "../src/js/runtime.js";
+  import define from "./src/js/MVBubbleChart.js";
+  import {Runtime, Library, Inspector} from "./src/js/runtime.js";
   const runtime = new Runtime();
   const main = runtime.module(define, Inspector.into(document.body));
   </script>
