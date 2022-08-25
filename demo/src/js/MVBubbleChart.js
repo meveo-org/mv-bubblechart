@@ -1,4 +1,3 @@
-
 import data from "./data.js";
 
 function _chart(BubbleChart, files) {

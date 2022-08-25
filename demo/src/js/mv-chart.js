@@ -1,11 +1,4 @@
-import {LitElement, html, css} from 'https://unpkg.com/lit-element/lit-element.js?module';
-import define from "./MVBubbleChart.js";
-import {Runtime, Inspector} from "./runtime.js";
-
-
-
-
-
+import {LitElement, html,css,} from "https://cdn.jsdelivr.net/gh/meveo-org/mv-dependencies@master/lit-element.js"
 
 
 class MyElement extends LitElement {

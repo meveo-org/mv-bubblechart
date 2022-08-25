@@ -1,7 +1,9 @@
 import { LitElement, html, css } from "lit-element";
 import "mv-container";
 import "https://d3js.org/d3.v7.min.js";
-import "./src/js/mv-chart.js";
+import "./demo/src/js/mv-chart.js";
+import define from "./demo/src/js/MVBubbleChart.js";
+import {Runtime, Library, Inspector} from "./demo/src/js/runtime.js";
 
 
 
@@ -83,14 +85,21 @@ export class MvChartBubbleDemo extends LitElement {
     this.theme = "light";
 
 
-
-
-
-
-
   }
 
 
+
+  firstUpdated (){
+
+    var chart=this.shadowRoot.querySelector('mv-container > mv-chart-bubble').shadowRoot;
+    console.log(chart);
+    const svg = d3.select(chart).select('#chart')
+    //const svg = document.querySelector('#chart');
+
+    const runtime = new Runtime();
+    const main = runtime.module(define, Inspector.into(document.body));
+
+  }
 
   render() {
 
@@ -121,6 +130,11 @@ export class MvChartBubbleDemo extends LitElement {
           <mv-chart-bubble></mv-chart-bubble>
 
       </mv-container>
+
+
+
+
+
 
       
     `;
