@@ -266,7 +266,7 @@ function _BubbleChart(d3, location) {
         .attr("class", "hits")
         .attr('fill', '#fff')
         .attr("x", 0)
-        .attr("y", 0)
+        .attr("y", d => `${d.r / 2}`)
         .attr("fill-opacity", (d, i, D) => i === D.length - 1 ? 1 : null)
 
 
@@ -278,7 +278,7 @@ function _BubbleChart(d3, location) {
         .attr("fill", "#fff")
         .attr("class", "title")
         .attr("x", 0)
-        .attr("y", d => `${d.r / 2}`)
+        .attr("y", 0)
 
         
 
