@@ -1,9 +1,14 @@
 import data from "./data.js";
 
+const displayValue = new Array();
+
+
+
 function _chart(BubbleChart, files) {
 
   return (
     BubbleChart(files, {
+      id : d => d.id,
       label: d => d.label,
       value: d => d.value,
       founds: d => d.founds,
@@ -22,18 +27,20 @@ function _chart(BubbleChart, files) {
 
 
 function _flare(FileAttachment) {
+//taille de bulle minimum
+  data.map((item,index) => {
+    if (item.value <= 10) {
+      displayValue[index] = item.value;   
+      item.value=  10; 
+    }
+    else{
+      displayValue[index] = item.value;
+      item.value;
+    }
+  });
 
 
-//delete bubbles under value
- 
-
-/*data.map((item,index)=>{
-     item.value=(item.value<5) ? [20,item.value] : item.value 
-  });*/
-
-
-
-  return data;
+return data;
 
 }
 
@@ -54,34 +61,37 @@ function _BubbleChart(d3, location) {
 
 
     function BubbleChart(data, {
+   
       name = ([x]) => x, // alias for label
       label = name, // given d in data, returns text to display on the bubble
       value = ([, y]) => y, // given d in data, returns a quantitative size
       group, // given d in data, returns a categorical value for color
       founds, // given d in data, items founds in data 
       image, //given d in data, images founds in data
-      title, // given d in data, returns text to show on hover
+      id,
+      // title, // given d in data, returns text to show on hover
       link, // given a node d, its link (if any)
       linkTarget = "_blank", // the target attribute for links, if any
       width = 640, // outer width, in pixels
       height = width, // outer height, in pixels
       padding = 3, // padding between circles
-      margin = 1, // default margins
+     // margin = 1, // default margins
       marginTop = 20, // top margin, in pixels
       marginRight = 20, // right margin, in pixels
       marginBottom = 20, // bottom margin, in pixels
       marginLeft = 40, // left margin, in pixels
       groups, // array of group names (the domain of the color scale)
       colors = d3.schemeTableau10, // an array of colors (for groups)
-      fill = "#ccc", // a static fill color, if no group channel is specified
-      fillOpacity = 1, // the fill opacity of the bubbles
-      stroke, // a static stroke around the bubbles
-      strokeWidth, // the stroke width around the bubbles, if any
-      strokeOpacity, // the stroke opacity around the bubbles, if any
+    //  fill = "#ccc", // a static fill color, if no group channel is specified
+     // fillOpacity = 1, // the fill opacity of the bubbles
+     // stroke, // a static stroke around the bubbles
+     // strokeWidth, // the stroke width around the bubbles, if any
+    //  strokeOpacity, // the stroke opacity around the bubbles, if any
     } = {}) {
       // Compute the values.
-      const D = d3.map(data, d => d);
+     // const D = d3.map(data, d => d);
       const V = d3.map(data, value);
+      const D = d3.map(data, d => d);
 
 
       const G = group == null ? null : d3.map(data, group);
@@ -100,7 +110,8 @@ function _BubbleChart(d3, location) {
       const F = founds == null ? null : d3.map(data, founds);
       const P = image == null ? null : d3.map(data, image);
       const K = link == null ? null : d3.map(data, link);
-      const Val = value == null ? null : d3.map(data, value);
+      const Z = id == null ? null : d3.map(data, id);
+      //const Val = value == null ? null : d3.map(data, value);
 
 
 
@@ -146,7 +157,7 @@ function _BubbleChart(d3, location) {
         .data(root.leaves())
         .join("g")
 
-        .attr("target", link == null ? null : linkTarget)
+        
         .attr("transform", d => `translate(${d.x},${d.y})`)
 
 
@@ -160,7 +171,7 @@ function _BubbleChart(d3, location) {
 
 
 
-
+ 
 
  
 
@@ -196,6 +207,7 @@ function _BubbleChart(d3, location) {
 
         clip.append("a")
         .attr("xlink:href", d => K[d.data])
+        .attr("target", link == null ? null : linkTarget)
         .append('image')
         .attr('xlink:href', './src/img/fiche-bubblechart.svg')
         .attr('width', d => `${d.r / 1.2}`)
@@ -219,7 +231,20 @@ function _BubbleChart(d3, location) {
         .attr("x", d => -`${d.r / 1.2 / 2}`)
         .attr("y", d => -`${d.r / 1.2 + 10}`)
         .attr("opacity", 0.5)
+        
+       
+        
+  
 
+
+
+        
+      
+
+     
+
+
+    
 
 
       //founds
@@ -234,6 +259,18 @@ function _BubbleChart(d3, location) {
         .style("font-size", d => `${d.r / 3}` + "px")
 
 
+        clip.append ('text')
+        .text (d => displayValue[d.data] + ' hits' )
+        .style("font-size", d => `${d.r / 6}` + "px")
+        .attr("fill", "#fff")
+        .attr("class", "hits")
+        .attr('fill', '#fff')
+        .attr("x", 0)
+        .attr("y", 0)
+        .attr("fill-opacity", (d, i, D) => i === D.length - 1 ? 1 : null)
+
+
+
 
 
 
@@ -242,19 +279,8 @@ function _BubbleChart(d3, location) {
         .attr("class", "title")
         .attr("x", 0)
         .attr("y", d => `${d.r / 2}`)
-      //hits
-      clip.append("text")
-        .style("font-size", d => `${d.r / 6}` + "px")
-        .attr("fill", "#fff")
-        .attr("class", "hits")
-        .selectAll("tspan")
-        .data(d => `${d.value}`.split(/\n/g))
-        .join("tspan")
-        .attr('fill', '#fff')
-        .attr("x", 0)
-        .attr("y", 0)
-        .attr("fill-opacity", (d, i, D) => i === D.length - 1 ? 1 : null)
-        .text(d => d)
+
+        
 
 
 
@@ -263,6 +289,7 @@ function _BubbleChart(d3, location) {
       clip.select("tspan:last-child")
         .append("tspan").text(" hits").attr('class', 'hits')
         .style("font-size", d => `${d.r / 6}` + "px")
+        
 
 
       clip
@@ -288,7 +315,7 @@ function _BubbleChart(d3, location) {
 
 export default function define(runtime, observer) {
   const main = runtime.module();
-  function toString() { return this.url; }
+ // function toString() { return this.url; }
 
 
   // main.builtin("FileAttachment", runtime.fileAttachments(name => datas.get(name)));
