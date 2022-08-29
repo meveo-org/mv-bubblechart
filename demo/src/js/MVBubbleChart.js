@@ -1,62 +1,39 @@
 import data from "./data.js";
-
 const displayValue = new Array();
 
 
+//function taille bulle minimum
+data.map((item,index) => {
+  if (item.value <= 20) {
+    displayValue[index] = item.value;   
+    item.value=  10; 
+  }
+  else{
+    displayValue[index] = item.value;
+    item.value;
+  }
+});
 
-function _chart(BubbleChart, files) {
-
-  return (
-    BubbleChart(files, {
-      id : d => d.id,
-      label: d => d.label,
-      value: d => d.value,
-      founds: d => d.founds,
-      image: d => d.image,
-      link: d => d.link,
-      width: 600,
-      height: 600
-    })
-
-
-  )
-}
+const files =  d3.map(data, d => d);
 
 
 
-
-
-function _flare(FileAttachment) {
-//taille de bulle minimum
-  data.map((item,index) => {
-    if (item.value <= 10) {
-      displayValue[index] = item.value;   
-      item.value=  10; 
-    }
-    else{
-      displayValue[index] = item.value;
-      item.value;
-    }
-  });
-
-
-return data;
-
-}
+console.log (files);
 
 
 
-function _files(flare) {
-  return (
-    flare.filter(d => d.data !== null)
-  )
-}
+const chart = BubbleChart(files, {
+  id : d => d.id,
+  label: d => d.label,
+  value: d => d.value,
+  founds: d => d.founds,
+  image: d => d.image,
+  link: d => d.link,
+  width: 600,
+  height: 600
+})
 
 
-
-
-function _BubbleChart(d3, location) {
-  return (
 
 
 
@@ -188,15 +165,8 @@ function _BubbleChart(d3, location) {
       const gradiant = clip.append('circle')
 
 
-        //fix radius  bubble if too small
-        //.attr("r", d => (d.r<50) ?  70 : d.r)
+
         .attr("r", d => d.r)
-
-
-
-
-  
-
 
 
       gradiant.each(function (p, j) {
@@ -218,10 +188,6 @@ function _BubbleChart(d3, location) {
 
 
 
-
-
-
-
       //image svg icon
 
       clip.append('image')
@@ -232,20 +198,7 @@ function _BubbleChart(d3, location) {
         .attr("y", d => -`${d.r / 1.2 + 10}`)
         .attr("opacity", 0.5)
         
-       
-        
-  
-
-
-
-        
-      
-
-     
-
-
-    
-
+ 
 
       //founds
 
@@ -310,24 +263,9 @@ function _BubbleChart(d3, location) {
 
       return Object.assign(svg.node(), { scales: { color } });
     }
-  )
-}
-
-export default function define(runtime, observer) {
-  const main = runtime.module();
- // function toString() { return this.url; }
 
 
-  // main.builtin("FileAttachment", runtime.fileAttachments(name => datas.get(name)));
-  main.variable(observer("chart")).define("chart", ["BubbleChart", "files"], _chart);
-  main.variable(observer("flare")).define("flare", ["FileAttachment"], _flare);
-  main.variable(observer("files")).define("files", ["flare"], _files);
-  main.variable(observer("BubbleChart")).define("BubbleChart", ["d3", "location"], _BubbleChart);
 
-
-  return main;
-
-}
 
 
 
