@@ -3,10 +3,12 @@ const displayValue = new Array();
 
 
 //function taille bulle minimum
+
+let sizeMini = 10 ; 
 data.map((item,index) => {
-  if (item.value <= 20) {
+  if (item.value <= sizeMini) {
     displayValue[index] = item.value;   
-    item.value=  10; 
+    item.value=  sizeMini; 
   }
   else{
     displayValue[index] = item.value;
@@ -18,7 +20,7 @@ const files =  d3.map(data, d => d);
 
 
 
-console.log (files);
+
 
 
 

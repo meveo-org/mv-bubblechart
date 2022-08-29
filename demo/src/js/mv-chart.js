@@ -1,7 +1,7 @@
 import {LitElement, html,css,} from "https://cdn.jsdelivr.net/gh/meveo-org/mv-dependencies@master/lit-element.js"
 
 
-class MyElement extends LitElement {
+class MvChartBubble extends LitElement {
 
   static get properties() {
     return {
@@ -171,4 +171,4 @@ svg {
   
 }
 
-customElements.define('mv-chart-bubble', MyElement);
+customElements.define('mv-chart-bubble', MvChartBubble);
