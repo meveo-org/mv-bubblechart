@@ -3,11 +3,6 @@ import "mv-container";
 import "https://d3js.org/d3.v7.min.js";
 import "./demo/src/js/mv-chart.js";
 
-
-
-
-
-
 export class MvChartBubbleDemo extends LitElement {
   static get properties() {
     return {
@@ -64,51 +59,35 @@ export class MvChartBubbleDemo extends LitElement {
         grid-gap: 0;
       }
 
-
-
       .dashboard-grid {
         display: grid;
         grid-template-columns: 250px 250px;
         grid-template-rows: 290px 290px;
         grid-gap: 0;
       }
-
-
- 
-
-
     `;
   }
 
   constructor() {
     super();
     this.theme = "light";
- 
-  
-
   }
 
+  firstUpdated() {
+    var chart = document.querySelector("mv-frontend-demo").shadowRoot;
 
+    var chart = chart.querySelector("mv-chart-bubble-demo").shadowRoot;
 
-  firstUpdated (){
+    var chart = chart.querySelector("mv-chart-bubble").shadowRoot;
 
-    var chart=document.querySelector('mv-frontend-demo').shadowRoot;
+    const svg = d3.select(chart).select("#chart");
 
-    var chart=chart.querySelector('mv-chart-bubble-demo').shadowRoot;
-    
-    var chart = chart.querySelector('mv-chart-bubble').shadowRoot;
-    
-    const svg = d3.select(chart).select('#chart');
-    
-    console.log (chart);
-    
-    console.log (svg);
-  
+    console.log(chart);
 
+    console.log(svg);
   }
 
   render() {
-
     return html`
       <fieldset>
         <legend>Theme</legend>
@@ -132,42 +111,17 @@ export class MvChartBubbleDemo extends LitElement {
       </fieldset>
 
       <mv-container class="main-container" .theme="${this.theme}">
-   
-          <mv-chart-bubble></mv-chart-bubble>
-
+        <mv-chart-bubble></mv-chart-bubble>
       </mv-container>
-
-
-
-
-
-
-      
     `;
   }
 
-
-
-
-
-
-    
-    changeTheme = originalEvent => {
-        const {
-          target: { value }
-        } = originalEvent;
-        this.theme = value;
-    };
-
-
-
-    
-
+  changeTheme = (originalEvent) => {
+    const {
+      target: { value },
+    } = originalEvent;
+    this.theme = value;
+  };
 }
-
-
-
-
-
 
 customElements.define("mv-chart-bubble-demo", MvChartBubbleDemo);

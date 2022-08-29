@@ -1,37 +1,32 @@
 <html>
-<head>
+  <head>
+    <script type="module" src="./src/js/mv-chart.js"></script>
 
+    <script src="./src/js/d3.v7.min.js"></script>
+    <style>
+      .observablehq {
+        display: none;
+      }
+      body {
+        background-color: #eaf4f8;
+      }
+    </style>
+    <script type="importmap-shim">
+      {
+        "imports": {
+          "lit-element": "https://cdn.jsdelivr.net/gh/meveo-org/mv-dependencies@master/lit-element.js",
+          "mv-container": "https://cdn.jsdelivr.net/gh/meveo-org/mv-container@master/mv-container.js",
+        }
+      }
+    </script>
+  </head>
+  <body>
+    <mv-chart-bubble></mv-chart-bubble>
 
-  <script type="module" src="./src/js/mv-chart.js"></script>
-
-  
-
-<script src="./src/js/d3.v7.min.js"></script>
-<style>  .observablehq{display:none;}   body{background-color:#EAF4F8;}</style>
-<script type="importmap-shim">
-  {
-    "imports": {
-      "lit-element": "https://cdn.jsdelivr.net/gh/meveo-org/mv-dependencies@master/lit-element.js",
-      "mv-container": "https://cdn.jsdelivr.net/gh/meveo-org/mv-container@master/mv-container.js",
-    }
-  }
-</script>
-</head>
-<body>
-
-  
-  <mv-chart-bubble></mv-chart-bubble>
-  
-
-
-  <script type="module">
-  var chart=document.querySelector('mv-chart-bubble').shadowRoot;
-  const svg = d3.select(chart).select('#chart') ;
-  import "./src/js/MVBubbleChart.js";
-
-
-  </script>
-
-
-</body>
+    <script type="module">
+      var chart = document.querySelector("mv-chart-bubble").shadowRoot;
+      const svg = d3.select(chart).select("#chart");
+      import "./src/js/MVBubbleChart.js";
+    </script>
+  </body>
 </html>
