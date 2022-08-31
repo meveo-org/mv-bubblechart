@@ -2,8 +2,22 @@ import data from "./data.js";
 const displayValue = new Array();
 
 //function taille bulle minimum
+let sizeMini ;
 
-let sizeMini = 10;
+
+let prec=0;
+
+data.map((item) => {
+  if (item.value > prec) {
+   prec = item.value;
+  } 
+});
+
+
+
+bulleMini(prec*10/100);
+
+function bulleMini(sizeMini){
 data.map((item, index) => {
   if (item.value <= sizeMini) {
     displayValue[index] = item.value;
@@ -13,6 +27,7 @@ data.map((item, index) => {
     item.value;
   }
 });
+}
 
 const files = d3.map(data, (d) => d);
 
@@ -139,6 +154,34 @@ function BubbleChart(
     .attr("y", (d) => -`${d.r / 1.2 + 10}`)
     .attr("opacity", 0);
 
+
+    clip .on("mouseover", function () {
+      d3.select(this)
+        .select("image")
+        .attr("opacity", "0")
+        .transition()
+        .duration(1000)
+        
+        .attr("opacity", function(d) {            
+          if ( K[d.data] != "") {return 1}  
+          else    { return 0 }          
+      ;})         
+    })
+    clip.on("mouseout", function () {
+      d3.select(this)
+        .select("image")
+        .attr("opacity", function(d) {            
+          if ( K[d.data] != "") {return 1}  
+          else    { return 0 }          
+      ;})         
+        .transition()
+        .duration(1000)
+        .attr("opacity", "0");
+    })
+
+
+
+
   //image svg icon
 
   clip
@@ -188,23 +231,7 @@ function BubbleChart(
     .attr("class", "hits")
     .style("font-size", (d) => `${d.r / 6}` + "px");
 
-  clip
-    .on("mouseover", function () {
-      d3.select(this)
-        .select("image")
-        .attr("opacity", "0")
-        .transition()
-        .duration(1000)
-        .attr("opacity", "1");
-    })
-    .on("mouseout", function () {
-      d3.select(this)
-        .select("image")
-        .attr("opacity", "1")
-        .transition()
-        .duration(1000)
-        .attr("opacity", "0");
-    });
+
 
   return Object.assign(svg.node(), { scales: { color } });
 }

@@ -4,7 +4,7 @@ const data = [{
     "founds" : 3,
     "value": 25,
     "image": "./src/img/website.svg",
-    "link" : "http://" 
+    "link" : "" 
   },{
     "id":2,
     "label": "Emails",
