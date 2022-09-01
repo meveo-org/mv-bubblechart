@@ -1,7 +1,7 @@
 import { LitElement, html, css } from "lit-element";
 import "mv-container";
 import "https://d3js.org/d3.v7.min.js";
-import "./demo/src/js/mv-chart.js";
+import "./bubblechart/src/js/mv-bubble-chart.js";
 
 export class MvChartBubbleDemo extends LitElement {
   static get properties() {
@@ -74,17 +74,7 @@ export class MvChartBubbleDemo extends LitElement {
   }
 
   firstUpdated() {
-    var chart = document.querySelector("mv-frontend-demo").shadowRoot;
 
-    var chart = chart.querySelector("mv-chart-bubble-demo").shadowRoot;
-
-    var chart = chart.querySelector("mv-chart-bubble").shadowRoot;
-
-    const svg = d3.select(chart).select("#chart");
-
-    console.log(chart);
-
-    console.log(svg);
   }
 
   render() {
