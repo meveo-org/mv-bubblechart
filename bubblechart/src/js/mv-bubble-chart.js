@@ -128,7 +128,7 @@ class MvChartBubble extends LitElement {
 
     let prec = 0;
 
-    data.map((item) => {
+    data.datas.map((item) => {
       if (item.value > prec) {
         prec = item.value;
       }
@@ -136,10 +136,10 @@ class MvChartBubble extends LitElement {
 
 
 
-    bulleMini(prec * 10 / 100);
+    bulleMini(prec * data.percentSizeMini / 100);
 
     function bulleMini(sizeMini) {
-      data.map((item, index) => {
+      data.datas.map((item, index) => {
         if (item.value <= sizeMini) {
           displayValue[index] = item.value;
           item.value = sizeMini;
@@ -150,7 +150,13 @@ class MvChartBubble extends LitElement {
       });
     }
 
-    const files = d3.map(data, (d) => d);
+    const files = d3.map(data.datas, (d) => d);
+
+    const labelBubble1 = data.label1;
+
+    const labelBubble2 = data.label2;
+
+
 
     const chart = BubbleChart(files, {
       id: (d) => d.id,
@@ -215,6 +221,9 @@ class MvChartBubble extends LitElement {
       const K = link == null ? null : d3.map(data, link);
       const Z = id == null ? null : d3.map(data, id);
       //const Val = value == null ? null : d3.map(data, value);
+
+
+
 
       // Compute layout: create a 1-deep hierarchy, and pack it.
       const root = d3
@@ -331,12 +340,12 @@ class MvChartBubble extends LitElement {
         .attr("x", 0)
         .attr("y", (d) => `${d.r / 3.5}`)
         .attr("class", "founds")
-        .text((d) => F[d.data] + " founds")
+        .text((d) => F[d.data] + " " + labelBubble1)
         .style("font-size", (d) => `${d.r / 3}` + "px");
 
       clip
         .append("text")
-        .text((d) => displayValue[d.data] + " hits")
+        .text((d) => displayValue[d.data] + " " + labelBubble2)
         .style("font-size", (d) => `${d.r / 6}` + "px")
         .attr("fill", "#fff")
         .attr("class", "hits")
