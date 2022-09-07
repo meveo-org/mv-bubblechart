@@ -4,7 +4,7 @@ const data = {
   percentSizeMini: 50,
   datas: [{
     "id": 1,
-    "label": "Websites",
+    "label": "Websites Websites Websites Websites Websites Websites",
     "founds": Math.floor(Math.random() * 10),
     "value": Math.floor(Math.random() * 100000),
     "image": "./src/img/website.svg",

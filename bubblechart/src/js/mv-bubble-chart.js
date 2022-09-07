@@ -160,7 +160,7 @@ class MvChartBubble extends LitElement {
 
     const chart = BubbleChart(files, {
       id: (d) => d.id,
-      label: (d) => d.label,
+      label: (d) => d.label.substr(0, 25),
       value: (d) => d.value,
       founds: (d) => d.founds,
       image: (d) => d.image,
