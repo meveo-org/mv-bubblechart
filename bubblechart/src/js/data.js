@@ -4,31 +4,31 @@ const data = {
   percentSizeMini: 50,
   datas: [{
     "id": 1,
-    "label": "Websites Websites Websites Websites Websites Websites",
+    "label": "Sites web",
     "founds": Math.floor(Math.random() * 10),
     "value": Math.floor(Math.random() * 100000),
-    "image": "./src/img/website.svg",
+    "image": "./bubblechart/src/img/website.svg",
     "link": ""
   }, {
     "id": 2,
     "label": "Emails",
     "founds": Math.floor(Math.random() * 10),
     "value": Math.floor(Math.random() * 100000),
-    "image": "./src/img/email.svg",
+    "image": "./bubblechart/src/img/email.svg",
     "link": "http://"
   }, {
     "id": 3,
-    "label": "Phone Numbers",
+    "label": "Numéros de téléphone",
     "founds": Math.floor(Math.random() * 10),
     "value": Math.floor(Math.random() * 100000),
-    "image": "./src/img/phone.svg",
+    "image": "./bubblechart/src/img/phone.svg",
     "link": "http://"
   }, {
     "id": 4,
-    "label": "Social Media",
+    "label": "Réseaux sociaux",
     "founds": Math.floor(Math.random() * 10),
     "value": Math.floor(Math.random() * 100000),
-    "image": "./src/img/phone.svg",
+    "image": "./bubblechart/src/img/phone.svg",
     "link": "http://"
   }]
 }

@@ -1,7 +1,7 @@
-import { LitElement, html, css } from "lit-element";
-import "mv-container";
-import "https://d3js.org/d3.v7.min.js";
+import { LitElement, html, css } from "lit";
+//import "mv-container";
 import "./bubblechart/src/js/mv-bubble-chart.js";
+import data from "./bubblechart/src/js/data.js";
 
 export class MvChartBubbleDemo extends LitElement {
   static get properties() {
@@ -82,26 +82,16 @@ export class MvChartBubbleDemo extends LitElement {
       <fieldset>
         <legend>Theme</legend>
         <label>
-          <input
-            type="radio"
-            name="theme"
-            value="light"
-            checked
-            @change="${this.changeTheme}"
-          />Light
+          <input type="radio" name="theme" value="light" checked @change="${this.changeTheme}" />Light
         </label>
         <label>
-          <input
-            type="radio"
-            name="theme"
-            value="dark"
-            @change="${this.changeTheme}"
-          />Dark
+          <input type="radio" name="theme" value="dark" @change="${this.changeTheme}" />Dark
         </label>
       </fieldset>
-
+      
       <mv-container class="main-container" .theme="${this.theme}">
-        <mv-chart-bubble></mv-chart-bubble>
+        <mv-chart-bubble .data="${data}">
+        </mv-chart-bubble>
       </mv-container>
     `;
   }

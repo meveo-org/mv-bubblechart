@@ -2,12 +2,19 @@ import {
   LitElement,
   html,
   css,
-} from "https://cdn.jsdelivr.net/gh/meveo-org/mv-dependencies@master/lit-element.js";
-import data from "./data.js";
+} from "lit";
+
 class MvChartBubble extends LitElement {
   static get properties() {
     return {
       mood: { type: String },
+    },
+    {
+      data: {
+        type: Object,
+        attribute: false,
+        reflect: true
+      }
     };
   }
 
@@ -29,9 +36,6 @@ class MvChartBubble extends LitElement {
         font-weight: normal;
       }
 
-      .observablehq {
-        display: none;
-      }
 
       svg .title {
         font: normal 21px sans-serif;
@@ -56,13 +60,16 @@ class MvChartBubble extends LitElement {
         margin: auto;
       }
 
-      svg,
-      body {
-        background-color: #eaf4f8;
+      svg {
+        background-color: #EAF4F8;
       }
     `;
   }
+  constructor() {
+    super();
+    this.data = null;
 
+  }
   render() {
     return html`
       <svg id="chart">
@@ -128,7 +135,7 @@ class MvChartBubble extends LitElement {
 
     let prec = 0;
 
-    data.datas.map((item) => {
+    this.data.datas.map((item) => {
       if (item.value > prec) {
         prec = item.value;
       }
@@ -136,9 +143,10 @@ class MvChartBubble extends LitElement {
 
 
 
-    bulleMini(prec * data.percentSizeMini / 100);
+    bulleMini(prec * this.data.percentSizeMini / 100, this.data);
 
-    function bulleMini(sizeMini) {
+    function bulleMini(sizeMini, data) {
+
       data.datas.map((item, index) => {
         if (item.value <= sizeMini) {
           displayValue[index] = item.value;
@@ -150,11 +158,11 @@ class MvChartBubble extends LitElement {
       });
     }
 
-    const files = d3.map(data.datas, (d) => d);
+    const files = d3.map(this.data.datas, (d) => d);
 
-    const labelBubble1 = data.label1;
+    const labelBubble1 = this.data.label1;
 
-    const labelBubble2 = data.label2;
+    const labelBubble2 = this.data.label2;
 
 
 
@@ -231,7 +239,8 @@ class MvChartBubble extends LitElement {
         .size([width - marginLeft - marginRight, height - marginTop - marginBottom])
         .padding(padding)(d3.hierarchy({ children: I }).sum((i) => V[i]));
 
-      var chart = document.querySelector("mv-chart-bubble").shadowRoot;
+      var chart = document.querySelector("mv-chart-bubble-demo").shadowRoot;
+      chart = chart.querySelector("mv-chart-bubble").shadowRoot;
 
       const svg = d3
         .select(chart)
@@ -340,12 +349,12 @@ class MvChartBubble extends LitElement {
         .attr("x", 0)
         .attr("y", (d) => `${d.r / 3.5}`)
         .attr("class", "founds")
-        .text((d) => F[d.data] + " " + labelBubble1)
+        .text((d) => (labelBubble1 ? F[d.data] + " " + labelBubble1 : null))
         .style("font-size", (d) => `${d.r / 3}` + "px");
 
       clip
         .append("text")
-        .text((d) => displayValue[d.data] + " " + labelBubble2)
+        .text((d) => (labelBubble2 ? displayValue[d.data] + " " + labelBubble2 : null))
         .style("font-size", (d) => `${d.r / 6}` + "px")
         .attr("fill", "#fff")
         .attr("class", "hits")
