@@ -2,7 +2,7 @@ import {
   LitElement,
   html,
   css,
-} from "https://cdn.jsdelivr.net/gh/meveo-org/mv-dependencies@master/lit-element.js";
+} from "lit";
 
 class MvChartBubble extends LitElement {
   static get properties() {

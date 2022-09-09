@@ -1,4 +1,4 @@
-import { LitElement, html, css } from "https://cdn.jsdelivr.net/gh/meveo-org/mv-dependencies@master/lit-element.js";
+import { LitElement, html, css } from "lit";
 //import "mv-container";
 import "./bubblechart/src/js/mv-bubble-chart.js";
 import data from "./bubblechart/src/js/data.js";
