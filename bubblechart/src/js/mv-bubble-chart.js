@@ -2,7 +2,7 @@ import {
   LitElement,
   html,
   css,
-} from "lit";
+} from "https://cdn.jsdelivr.net/gh/meveo-org/mv-dependencies@master/lit-element.js";
 
 class MvChartBubble extends LitElement {
   static get properties() {
@@ -293,7 +293,7 @@ class MvChartBubble extends LitElement {
         .attr("xlink:href", (d) => K[d.data])
         .attr("target", link == null ? null : linkTarget)
         .append("image")
-        .attr("xlink:href", "./src/img/fiche-bubblechart.svg")
+        .attr("xlink:href", "./bubblechart/src/img/fiche-bubblechart.svg")
         .attr("width", (d) => `${d.r / 2}`)
         .attr("height", (d) => `${d.r / 2}`)
         .attr("x", (d) => -`${d.r / 1.2 / 8}` * 10)
