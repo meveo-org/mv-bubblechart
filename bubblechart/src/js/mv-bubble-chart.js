@@ -4,6 +4,8 @@ import {
   css,
 } from "lit";
 
+import * as d3 from 'd3';
+
 class MvChartBubble extends LitElement {
   static get properties() {
     return {

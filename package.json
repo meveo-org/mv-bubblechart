@@ -1,7 +1,7 @@
 {
-  "name": "mv-doughnut-chart",
+  "name": "mv-bubble-chart",
   "type": "module",
-  "main": "donutchart/src/js/mv-donut-chart.js",
+  "main": "bubblechart/src/js/mv-bubble-chart.js",
   "dependencies": {
     "chart.js": "^3.9.1",
     "chartjs-plugin-datalabels": "^2.1.0",
@@ -11,7 +11,8 @@
     "lit-html": "^2.3.1"
   },
   "scripts": {
-    "dev": "webpack serve -c webpack.config.cjs"
+    "dev": "webpack serve -c webpack.config.cjs",
+    "build": "webpack ./bubblechart/src/js/mv-bubble-chart.js --output-filename=index.js --mode=development"
   },
   "devDependencies": {
     "webpack": "^5.74.0",
