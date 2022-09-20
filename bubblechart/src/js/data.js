@@ -5,29 +5,29 @@ const data = {
   datas: [{
     "id": 1,
     "label": "Sites web",
-    "founds": Math.floor(Math.random() * 10),
-    "value": Math.floor(Math.random() * 100000),
+    "founds": 10,
+    "value": 100,
     "image": "./bubblechart/src/img/website.svg",
-    "link": ""
-  }, {
+    "link": " "
+  },{
     "id": 2,
     "label": "Emails",
-    "founds": Math.floor(Math.random() * 10),
-    "value": Math.floor(Math.random() * 100000),
+    "founds": 20,
+    "value": 100,
     "image": "./bubblechart/src/img/email.svg",
     "link": "http://"
-  }, {
+  },{
     "id": 3,
     "label": "Numéros de téléphone",
-    "founds": Math.floor(Math.random() * 10),
-    "value": Math.floor(Math.random() * 100000),
+    "founds": 20,
+    "value": 300,
     "image": "./bubblechart/src/img/phone.svg",
     "link": "http://"
-  }, {
+  },{
     "id": 4,
     "label": "Réseaux sociaux",
-    "founds": Math.floor(Math.random() * 10),
-    "value": Math.floor(Math.random() * 100000),
+    "founds": 28,
+    "value": 125,
     "image": "./bubblechart/src/img/phone.svg",
     "link": "http://"
   }]
