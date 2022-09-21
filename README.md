@@ -15,7 +15,10 @@ To experiment with the MvChart component.
 ## Sample usage
 
 ```html
-<mv-chart-bubble></mv-chart-bubble>
+<mv-chart-bubble
+.data="${data}" // data properties
+.theme="${this.theme}" // theme is either "light" or "dark"
+></mv-chart-bubble>
 ```
 
 You can also check this [demo](https://chart.meveo.org/)
