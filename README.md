@@ -43,4 +43,4 @@ The chart has the following properties:
 You can also check this [demo](https://chart.meveo.org/)
 
 ## Acknowledgement
-Uses [chartjs](https://www.chartjs.org/) library for rendering the charts
+Uses [d3js](https://d3js.org) library for rendering the charts
