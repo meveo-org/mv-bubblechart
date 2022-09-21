@@ -1,6 +1,6 @@
-# mv-chart
+# mv-bubble-chart
 
-MvChart is a Meveo chart component (based on lit-element) that renders a content chart.  This is a component wrapper for [chartjs](https://www.chartjs.org/)
+MvBubbleChart is a Meveo chart component (based on lit-element) that renders a content chart.  This is a component wrapper for [chartjs](https://www.chartjs.org/)
 
 ## Quick Start
 
