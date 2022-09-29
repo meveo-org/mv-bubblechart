@@ -1,12 +1,13 @@
 import { LitElement, html, css } from "lit";
 //import "mv-container";
 import "./bubblechart/src/js/mv-bubble-chart.js";
-import data from "./bubblechart/src/js/data.js";
+import DATA from "./bubblechart/src/js/data.js";
 
 export class MvChartBubbleDemo extends LitElement {
   static get properties() {
     return {
       theme: { type: String, attribute: true },
+      _data: { type: Object, state: true, reflect: true }
     };
   }
 
@@ -65,12 +66,32 @@ export class MvChartBubbleDemo extends LitElement {
         grid-template-rows: 290px 290px;
         grid-gap: 0;
       }
+
+
+      
+      textarea {
+        position: fixed;
+        display: block;
+        left: 0px;
+        top: 10%;
+        min-height: 50% !important;
+        height:80% !important;
+        min-width: 200px !important;
+        box-shadow: 10px 10px 10px #ccc;
+        border-radius: 0px 20px 20px 0px;
+        padding: 50px 20px;
+        
+      }
+
+
+
     `;
   }
 
   constructor() {
     super();
     this.theme = "light";
+    this._data = DATA;
   }
 
   firstUpdated() {
@@ -90,11 +111,34 @@ export class MvChartBubbleDemo extends LitElement {
       </fieldset>
       
       <mv-container class="main-container" .theme="${this.theme}">
-        <mv-chart-bubble .data="${data}">
+        <mv-chart-bubble .data="${this._data}">
         </mv-chart-bubble>
       </mv-container>
+
+
+
+      <textarea id="data-donut" style="height:600px;width:40%;margin:auto;" @change="${this.getNewVal}">${JSON.stringify(this._data, null, 2)}</textarea>
+<button>test</button>
+
+
+
     `;
   }
+
+
+
+
+  getNewVal() {
+
+
+    let newVal = this.shadowRoot.querySelector('textarea').value
+
+    this._data = JSON.parse(newVal);
+    
+
+  }
+
+
 
   changeTheme = (originalEvent) => {
     const {

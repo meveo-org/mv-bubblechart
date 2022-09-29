@@ -123,7 +123,35 @@ class MvChartBubble extends LitElement {
     `;
   }
 
-  firstUpdated() {
+
+
+  updated() {
+
+
+
+
+
+    console.log('updated')
+    let mychart = this.shadowRoot.querySelector('g')
+
+ 
+  
+    console.log('initChart')
+
+ 
+
+    this.initChart()
+
+   
+  }
+
+
+
+
+
+
+
+initChart() {
 
 
 
@@ -258,6 +286,8 @@ class MvChartBubble extends LitElement {
         .append("g")
         .attr("class", "clip")
         .attr("style", "filter:url(#dropshadow)");
+
+        d3.select(chart).select("#center").selectAll("g").remove()
 
       const bubbles = d3.select(chart).select("#center");
 
