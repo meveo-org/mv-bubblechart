@@ -326,8 +326,8 @@ initChart() {
         .attr("target", link == null ? null : linkTarget)
         .append("image")
         .attr("xlink:href", "./bubblechart/src/img/fiche-bubblechart.svg")
-        .attr("width", (d) => `${d.r / 2}`)
-        .attr("height", (d) => `${d.r / 2}`)
+        .attr("width", `50px`)
+        .attr("height", `50px`)
         .attr("x", (d) => -`${d.r / 1.2 / 8}` * 10)
         .attr("y", (d) => -`${d.r / 1.2 + 10}`)
         .attr("opacity", 0);
