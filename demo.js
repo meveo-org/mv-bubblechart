@@ -77,11 +77,20 @@ export class MvChartBubbleDemo extends LitElement {
         min-height: 50% !important;
         height:80% !important;
         min-width: 200px !important;
-        box-shadow: 10px 10px 10px #ccc;
-        border-radius: 0px 20px 20px 0px;
+
+
         padding: 50px 20px;
         
       }
+
+      #button-change {z-index: 9999;
+float: right;
+position: fixed;
+bottom: 20px;
+background-color: #fff;
+border: solid 1px #000;
+padding: 10px 50px;
+}
 
 
 
@@ -118,7 +127,7 @@ export class MvChartBubbleDemo extends LitElement {
 
 
       <textarea id="data-donut" style="height:600px;width:40%;margin:auto;" @change="${this.getNewVal}">${JSON.stringify(this._data, null, 2)}</textarea>
-<button>test</button>
+<input type="submit" value="Reload !" id ="button-change" @click="${this.getNewVal}">
 
 
 
