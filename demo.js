@@ -3,7 +3,7 @@ import { LitElement, html, css } from "lit";
 import "./bubblechart/src/js/mv-bubble-chart.js";
 import DATA from "./bubblechart/src/js/data.js";
 
-export class MvChartBubbleDemo extends LitElement {
+export default class MvChartBubbleDemo extends LitElement {
   static get properties() {
     return {
       theme: { type: String, attribute: true },
@@ -84,13 +84,28 @@ export class MvChartBubbleDemo extends LitElement {
       }
 
       #button-change {z-index: 9999;
-float: right;
-position: fixed;
-bottom: 20px;
-background-color: #fff;
-border: solid 1px #000;
-padding: 10px 50px;
-}
+        float: right;
+        position: fixed;
+        bottom: 20px;
+        background-color: #fff;
+        border: solid 1px #000;
+        padding: 10px 50px;
+        }
+
+
+      textarea {
+        position: fixed;
+        display: block;
+        left: 0px;
+        top: 10%;
+        min-height: 50% !important;
+        height:80% !important;
+        min-width: 200px !important;
+        box-shadow: 10px 10px 10px #ccc;
+        border-radius: 0px 20px 20px 0px;
+        padding: 50px 20px;
+        
+      }
 
 
 
@@ -101,10 +116,6 @@ padding: 10px 50px;
     super();
     this.theme = "light";
     this._data = DATA;
-  }
-
-  firstUpdated() {
-
   }
 
   render() {
@@ -134,20 +145,10 @@ padding: 10px 50px;
     `;
   }
 
-
-
-
   getNewVal() {
-
-
-    let newVal = this.shadowRoot.querySelector('textarea').value
-
+    const newVal = this.shadowRoot.querySelector('textarea').value;
     this._data = JSON.parse(newVal);
-    
-
-  }
-
-
+}
 
   changeTheme = (originalEvent) => {
     const {
